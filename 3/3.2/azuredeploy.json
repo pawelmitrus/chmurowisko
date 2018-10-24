@@ -265,7 +265,7 @@
             "properties": {
               "addressPrefix": "[parameters('vnet-subnet1-Prefix')]",
               "networkSecurityGroup": {
-                "id": "reference('linkedTemplate').outputs.id.value"
+                "id": "[reference('linkedTemplate').outputs.id.value]"
               }
             }
           },
@@ -274,7 +274,7 @@
             "properties": {
               "addressPrefix": "[parameters('vnet-subnet2-Prefix')]",
               "networkSecurityGroup": {
-                "id": "reference('linkedTemplate').outputs.id.value"
+                "id": "[reference('linkedTemplate').outputs.id.value]"
               }
             }
           }

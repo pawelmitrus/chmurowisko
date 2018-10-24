@@ -4,7 +4,6 @@
   "parameters": {
     "nsg-name": {
         "type": "string",
-        "defaultValue": "pmi-az-nsg-dmz",
         "metadata": {
             "description": "nsg name"
         }
