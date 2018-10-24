@@ -1,13 +1,39 @@
-"if": {
-    "allOf": [{
-            "not": {
-                "field": "tags",
-                "containsKey": "application"
-            }
-        },
-        {
+{
+    "mode": "all",
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
             "field": "type",
-            "equals": "Microsoft.Storage/storageAccounts"
+            "in": "[parameters('listOfResourcesEnforcedByNamingConvention')]"
+          },
+          {
+            "not": {
+              "field": "name",
+              "like": "[concat(parameters('projectName'),'*')]"
+            }
+          }
+        ]
+      },
+      "then": {
+        "effect": "deny"
+      }
+    },
+    "parameters": {
+      "listOfResourcesEnforcedByNamingConvention": {
+        "type": "Array",
+        "metadata": {
+          "displayName": "Resource types enforced by naming convention",
+          "description": "The list of resource types that names are enforced by naming convention.",
+          "strongType": "resourceTypes"
         }
-    ]
-},
+      },
+      "projectName": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Project name",
+          "description": "Name of the project for prefix in naming convention pattern projectName-*"
+        }
+      }
+    }
+  }
