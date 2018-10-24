@@ -210,7 +210,7 @@
             "adminPassword": "[parameters('vm2-adminPassword')]"
           },
           "hardwareProfile": {
-            "vmSize": "[parameters('vm1-size')]"
+            "vmSize": "[parameters('vm2-size')]"
           },
           "storageProfile": {
             "imageReference": {
@@ -251,7 +251,7 @@
         "location": "[parameters('location')]",
         "comments": "This will build a Virtual Network.",
         "dependsOn": [
-          "[parameters('nsg-name')]"
+          "linkedTemplate"
         ],
         "properties": {
           "addressSpace": {
@@ -265,7 +265,7 @@
               "properties": {
                 "addressPrefix": "10.0.0.0/24",
                 "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsg-name'))]"
+                    "id": "reference('linkedTemplate').outputs.id.value"
                 }
               }
             },
@@ -274,8 +274,8 @@
               "properties": {
                 "addressPrefix": "10.0.1.0/24",
                 "networkSecurityGroup": {
-                    "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsg-name'))]"
-                }
+                    "id": "reference('linkedTemplate').outputs.id.value"
+                  }
                 }
             }
             ]
@@ -360,7 +360,7 @@
         "properties": {
             "mode": "Incremental",
             "templateLink": {
-                "uri":"https://git/linkedTemplate.json"
+                "uri":"https://github.com/pawelmitrus/chmurowisko/blob/master/3/3.2/linkedTemplate.json"
             },
             "parameters": {
                 "nsg-name":{"value": "[parameters('nsg-name')]"},
