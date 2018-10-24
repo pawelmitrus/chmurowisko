@@ -255,15 +255,13 @@
         ],
         "properties": {
           "addressSpace": {
-            "addressPrefixes": [
-              "10.0.0.0/16"
-            ]
+            "addressPrefixes": ["[parameters('vnet-addressPrefix')]"]
           },
           "subnets": [
             {
               "name": "[parameters('vnet-subnet1-name')]",
               "properties": {
-                "addressPrefix": "10.0.0.0/24",
+                "addressPrefix": "[parameters('vnet-subnet1-Prefix')]",
                 "networkSecurityGroup": {
                     "id": "reference('linkedTemplate').outputs.id.value"
                 }
@@ -272,7 +270,7 @@
             {
               "name": "[parameters('vnet-subnet2-name')]",
               "properties": {
-                "addressPrefix": "10.0.1.0/24",
+                "addressPrefix": "[parameters('vnet-subnet2-Prefix')]",
                 "networkSecurityGroup": {
                     "id": "reference('linkedTemplate').outputs.id.value"
                   }
