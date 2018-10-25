@@ -1,0 +1,29 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vm1-adminUsername": {
+       "value":"admin-pm-01"
+    },
+    "vm1-adminPassword": {
+        "reference":{
+            "keyVault":{
+                "id":"/subscriptions/64608ab0-2e01-4b7c-affc-8a31e8bc5389/resourceGroups/pmi-az/providers/Microsoft.KeyVault/vaults/pmiazKeyVault"
+            },
+            "secretName":"vmAdminPassword"
+        }
+    },
+    "vm2-adminUsername": {
+        "value":"admin-pm-02"
+     },
+    "vm2-adminPassword": {
+        "reference":{
+            "keyVault":{
+                "id":"/subscriptions/64608ab0-2e01-4b7c-affc-8a31e8bc5389/resourceGroups/pmi-az/providers/Microsoft.KeyVault/vaults/pmiazKeyVault"
+            },
+            "secretName":"vmAdminPassword"
+        }
+    }
+  }
+}
+

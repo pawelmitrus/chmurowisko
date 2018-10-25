@@ -1,0 +1,67 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "nsg-name": {
+        "type": "string",
+        "metadata": {
+            "description": "nsg name"
+        }
+    },
+    "location": {
+        "type": "string",
+        "metadata": {
+        "description": "Location for all resources."
+        }
+    }
+},
+  "resources": [
+    {
+        "type": "Microsoft.Network/networkSecurityGroups",
+        "name": "[parameters('nsg-name')]",
+        "apiVersion": "2016-03-30",
+        "location": "[parameters('location')]",
+        "tags": {
+            "displayName": "myVNetNSG"
+        },
+        "properties": {
+            "securityRules": [
+                {
+                    "name": "enable_ssh_rule",
+                    "properties": {
+                        "description": "Allow SSH",
+                        "protocol": "Tcp",
+                        "sourcePortRange": "*",
+                        "destinationPortRange": "22",
+                        "sourceAddressPrefix": "*",
+                        "destinationAddressPrefix": "*",
+                        "access": "Allow",
+                        "priority": 100,
+                        "direction": "Inbound"
+                    }
+                },
+                {
+                    "name": "enable_internet_rule",
+                    "properties": {
+                        "description": "Enable http Internet access",
+                        "protocol": "*",
+                        "sourcePortRange": "*",
+                        "destinationPortRange": "80",
+                        "sourceAddressPrefix": "Internet",
+                        "destinationAddressPrefix": "*",
+                        "access": "Allow",
+                        "priority": 110,
+                        "direction": "Inbound"
+                    }
+                }
+            ]
+        }
+    }
+  ],
+  "outputs": {
+    "id": {
+      "type": "string",
+      "value": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsg-name'))]"
+    }
+  }
+}
