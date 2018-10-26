@@ -1,0 +1,88 @@
+az vmss create --resource-group pmi-az --name vmss-test --image UbuntuLTS  --upgrade-policy-mo
+de automatic --admin-username admin-pm --generate-ssh-keys
+
+{
+  "vmss": {
+    "overprovision": true,
+    "provisioningState": "Succeeded",
+    "singlePlacementGroup": true,
+    "uniqueId": "50562624-671e-416c-8ce3-0371326677b7",
+    "upgradePolicy": {
+      "mode": "Automatic"
+    },
+    "virtualMachineProfile": {
+      "networkProfile": {
+        "networkInterfaceConfigurations": [
+          {
+            "name": "vmsstbcf6Nic",
+            "properties": {
+              "dnsSettings": {
+                "dnsServers": []
+              },
+              "enableAcceleratedNetworking": false,
+              "enableIPForwarding": false,
+              "ipConfigurations": [
+                {
+                  "name": "vmsstbcf6IPConfig",
+                  "properties": {
+                    "loadBalancerBackendAddressPools": [
+                      {
+                        "id": "/subscriptions/64608ab0-2e01-4b7c-affc-8a31e8bc5389/resourceGroups/pmi-az/providers/Microsoft.Network/loadBalancers/vmss-testLB/backendAddressPools/vmss-testLBBEPool",
+                        "resourceGroup": "pmi-az"
+                      }
+                    ],
+                    "loadBalancerInboundNatPools": [
+                      {
+                        "id": "/subscriptions/64608ab0-2e01-4b7c-affc-8a31e8bc5389/resourceGroups/pmi-az/providers/Microsoft.Network/loadBalancers/vmss-testLB/inboundNatPools/vmss-testLBNatPool",
+                        "resourceGroup": "pmi-az"
+                      }
+                    ],
+                    "privateIPAddressVersion": "IPv4",
+                    "subnet": {
+                      "id": "/subscriptions/64608ab0-2e01-4b7c-affc-8a31e8bc5389/resourceGroups/pmi-az/providers/Microsoft.Network/virtualNetworks/msft-hub-vnet/subnets/firewall",
+                      "resourceGroup": "pmi-az"
+                    }
+                  }
+                }
+              ],
+              "primary": true
+            }
+          }
+        ]
+      },
+      "osProfile": {
+        "adminUsername": "admin-pm",
+        "allowExtensionOperations": true,
+        "computerNamePrefix": "vmsstbcf6",
+        "linuxConfiguration": {
+          "disablePasswordAuthentication": true,
+          "provisionVMAgent": true,
+          "ssh": {
+            "publicKeys": [
+              {
+                "keyData": 
+                "path": "/home/admin-pm/.ssh/authorized_keys"
+              }
+            ]
+          }
+        },
+        "secrets": []
+      },
+      "storageProfile": {
+        "imageReference": {
+          "offer": "UbuntuServer",
+          "publisher": "Canonical",
+          "sku": "16.04-LTS",
+          "version": "latest"
+        },
+        "osDisk": {
+          "caching": "ReadWrite",
+          "createOption": "FromImage",
+          "managedDisk": {
+            "storageAccountType": "Premium_LRS"
+          }
+        }
+      }
+    }
+  }
+}
