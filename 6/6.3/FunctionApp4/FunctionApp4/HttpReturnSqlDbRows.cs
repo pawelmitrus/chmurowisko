@@ -14,6 +14,7 @@ namespace FunctionApp4
 {
     public static class HttpReturnSqlDbRows
     {
+        [Disable]
         [FunctionName("HttpReturnSqlDbRows")]
         public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequestMessage req, TraceWriter log)
         {

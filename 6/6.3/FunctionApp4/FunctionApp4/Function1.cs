@@ -6,6 +6,7 @@ namespace FunctionApp4
 {
     public static class Function1
     {
+        [Disable]
         [FunctionName("Function1")]
         public static void Run([TimerTrigger("0 0 * * * *")]TimerInfo myTimer, TraceWriter log,
             [Queue("pmi-az-af-queue", Connection = "AzureWebJobsStorage")] ICollector<string> queueCollector)

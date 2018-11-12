@@ -8,6 +8,7 @@ namespace FunctionApp4
 {
     public static class DequeueToSqlDb
     {
+        [Disable]
         [FunctionName("DequeueToSqlDb")]
         public static async Task Run([QueueTrigger("pmi-az-af-queue", Connection = "AzureWebJobsStorage")] string myQueueItem, TraceWriter log)
         {
